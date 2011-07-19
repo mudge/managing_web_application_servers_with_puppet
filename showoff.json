@@ -1,0 +1,13 @@
+{
+  "name": "Managing Web Application Servers with Puppet",
+  "sections": [
+    {"section": "intro"},
+    {"section": "the_old_way"},
+    {"section": "enter_configuration_management"},
+    {"section": "the_better_way"},
+    {"section": "patterns"},
+    {"section": "best_practices"},
+    {"section": "testing"},
+    {"section": "wrapup"}
+  ]
+}

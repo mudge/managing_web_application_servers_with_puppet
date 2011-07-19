@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Cabin Bold'), local('Cabin-Bold'), url('http://themes.googleusercontent.com/static/fonts/cabin/v1/haOjnueK8Or1ztuuRtr8dnYhjbSpvc47ee6xR_80Hnw.woff') format('woff');
+}
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Cabin Regular'), local('Cabin-Regular'), url('http://themes.googleusercontent.com/static/fonts/cabin/v1/kJXt72Gt1LyFMZcEKAAvlKCWcynf_cDxXwCLxiixG1c.woff') format('woff');
+}
+div.slide {
+  font: small Cabin, sans-serif;
+  background: #fff;
+  color: #000;
+}
+div.content {
+  padding: 2em;
+}
+h1 {
+  font-weight: bold;
+}
