@@ -22,7 +22,7 @@ h2, h1 span {
 div.shadow img {
   box-shadow: 5px 5px 5px #ccc;
 }
-code {
+code, pre.sh_sourceCode .sh_string {
   font-family: Consolas, Menlo, monospace;
 }
 h1 span {
