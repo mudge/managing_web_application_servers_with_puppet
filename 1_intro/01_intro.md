@@ -6,22 +6,22 @@
 # Who am I?
 
 !SLIDE center shadow
-![twitter](twitter.tiff)
+![twitter](twitter.png)
 
 # @mudge
 
 !SLIDE center shadow
-![github](github.tiff)
+![github](github.png)
 
 # github.com/mudge
 
 !SLIDE center shadow
-![mudge](mudge.tiff)
+![mudge](mudge.png)
 
 # mudge.name
 
 !SLIDE center shadow
-![rubygems](rubygems.tiff)
+![rubygems](rubygems.png)
 
 !SLIDE center shadow
 ![nature](nature.png)
