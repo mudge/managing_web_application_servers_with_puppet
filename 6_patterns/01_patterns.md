@@ -5,7 +5,7 @@
 # Ruby
 
 !SLIDE
-# nginx and Passenger
+# nginx <span>&</span> Passenger
 
 !SLIDE
 # database.yml

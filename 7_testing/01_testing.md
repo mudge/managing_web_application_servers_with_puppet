@@ -5,7 +5,7 @@
 # Testing
 
 !SLIDE
-# `$ puppet apply --noop`
+#`$ puppet apply --noop`
 
 !SLIDE center no-shadow
 ![vagrant](vagrant_chilling.png)

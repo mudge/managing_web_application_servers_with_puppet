@@ -1,6 +1,5 @@
 div.slide {
-  font: small Helvetica Neue, sans-serif;
-  -webkit-font-smoothing: subpixel-antialiased;
+  font: small Helvetica Neue, Helvetica, sans-serif;
   background: #fff;
   color: #000;
 }
@@ -17,7 +16,7 @@ h1 em, h1 strong {
 h1 strong {
   border-bottom: 5px solid #633;
 }
-h2 {
+h2, h1 span {
   color: #633;
 }
 div.shadow img {
@@ -26,6 +25,8 @@ div.shadow img {
 code {
   font-family: Consolas, Menlo, monospace;
 }
-div.input input {
-  font-size: 1em;
+h1 span {
+  font-family: Baskerville, Palatino, "Book Antiqua", serif;
+  font-style: italic;
+  font-weight: normal;
 }

@@ -16,6 +16,11 @@
 # github.com/mudge
 
 !SLIDE center shadow
+![mudge](mudge.tiff)
+
+# mudge.name
+
+!SLIDE center shadow
 ![rubygems](rubygems.tiff)
 
 !SLIDE center shadow

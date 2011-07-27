@@ -17,10 +17,10 @@
 # Directories
 
 !SLIDE
-# RVM & Ruby
+# RVM <span>&</span> Ruby
 
 !SLIDE
-# nginx and Passenger
+# nginx <span>&</span> Passenger
 
 !SLIDE
 # SSH keys
