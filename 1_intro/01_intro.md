@@ -21,9 +21,6 @@
 # mudge.name
 
 !SLIDE center shadow
-![rubygems](rubygems.png)
-
-!SLIDE center shadow
 ![nature](nature.png)
 
 !SLIDE
