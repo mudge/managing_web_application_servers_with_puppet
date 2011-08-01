@@ -27,6 +27,9 @@
 ![nature](nature.png)
 
 !SLIDE
+# Who is this talk for?
+
+!SLIDE
 # What am I talking about?
 
 !SLIDE
