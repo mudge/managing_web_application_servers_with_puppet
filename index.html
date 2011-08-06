@@ -1,0 +1,671 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Managing Web Application Servers with Puppet</title>
+
+  <link rel="stylesheet" href="./css/reset.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/showoff.css" type="text/css"/>
+
+  <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src="./js/jquery-print.js"></script>
+  <script type="text/javascript" src="./js/jquery.batchImageLoad.js"></script>
+
+  <script type="text/javascript" src="./js/jquery.doubletap-0.1.js"></script>
+
+  <script type="text/javascript" src="./js/fg.menu.js"></script>
+  <script type="text/javascript" src="./js/showoff.js"></script>
+  <script type="text/javascript" src="./js/jTypeWriter.js"> </script>
+  <script type="text/javascript" src="./js/sh_main.min.js"></script>
+  <script type="text/javascript" src="./js/core.js"></script>
+  <script type="text/javascript" src="./js/showoffcore.js"></script>
+
+  <link type="text/css" href="./css/fg.menu.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/theme/ui.all.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/sh_style.css" rel="stylesheet" >
+
+  
+    <link rel="stylesheet" href="file/custom.css" type="text/css"/>
+  
+
+  
+    <script type="text/javascript" src="file/custom.js"></script>
+  
+
+  <script type="text/javascript">
+  $(function(){
+    setupPreso(false, './');
+  });
+  </script>
+</head>
+
+<body>
+
+
+<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
+<div id="navigation" class="hidden"></div>
+
+<div id="help">
+  <table>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">&larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">d</td><td>debug mode</td></tr>
+    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
+    <tr><td class="key">c</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">z</td><td>toggle help (this)</td></tr>
+  </table>
+</div>
+
+<div class="buttonNav">
+  <input type="submit" onClick="prevStep();" value="prev"/>
+  <input type="submit" onClick="nextStep();" value="next"/>
+</div>
+
+<div id="preso">loading presentation...</div>
+<div id="footer">
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+</div>
+
+<div id="slides" class="offscreen" style="display:none;">
+<div class="slide" data-transition="none"><div class="content" ref="1_intro/01_intro/1">
+<h1>Managing Web Application Servers <em>with</em> Puppet</h1>
+
+<h2>Paul Mucur</h2></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="1_intro/01_intro/2">
+<h1>Who am I?</h1></div>
+</div><div class="slide" data-transition="none"><div class="content center shadow" ref="1_intro/01_intro/3">
+<p><img src="./file/1_intro/nature.png" alt="nature"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="1_intro/01_intro/4">
+<h1>Who is this talk for?</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="1_intro/01_intro/5">
+<h1>What am I talking about?</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="1_intro/01_intro/6">
+<h1>What am I <strong>not</strong> talking about?</h1></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="2_the_old_way/01_the_old_way/1">
+<h1>A typical Rails application</h1>
+
+<h2>"mcp"</h2></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/2">
+<pre><code><code class="command">$ ls mcp</code>
+<code class="result">Capfile      config       log
+Gemfile      config.ru    public
+Gemfile.lock db           script
+README       doc          spec
+Rakefile     features     tmp
+app          lib          vendor
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/3">
+<pre><code><code class="command">$ bundle exec rspec spec</code>
+<code class="result">................
+
+Finished in 0.00816 seconds
+Many, many examples, 0 failures
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="2_the_old_way/01_the_old_way/4">
+<h1>Let's prepare a server</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/5">
+<h1>Some assumptions</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/6">
+<pre><code><code class="command">$ ssh mudge@server1</code>
+<code class="result">Last login: Mon Aug  1 21:08:06 2011
+from 123-45-67-89.
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/7">
+<h1>Users</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/8">
+<pre><code><code class="command">$ /usr/sbin/adduser -h</code>
+<code class="result">adduser [--home DIR] [--shell SHELL]
+[--no-create-home] [--uid ID] [--firstuid ID]
+[--lastuid ID] [--gecos GECOS]
+[--ingroup GROUP | --gid ID]
+[--disabled-password] [--disabled-login]
+[--encrypt-home] USER
+   Add a normal user
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/9">
+<pre><code><code class="command">$ sudo -i</code>
+<code class="command"># adduser mcp</code>
+<code class="result">Adding user `mcp' ...
+Adding new group `mcp' (1002) ...
+Adding new user `mcp' (1001) with group `mcp' ...
+Creating home directory `/home/mcp' ...
+Copying files from `/etc/skel' ...
+Enter new UNIX password: 
+Retype new UNIX password: 
+...
+Is the information correct? [Y/n] 
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/10">
+<h1>SSH Keys</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/11">
+<pre><code><code class="command"># mkdir -m 700 ~mcp/.ssh</code>
+<code class="command"># vi ~mcp/.ssh/authorized_keys</code>
+<code class="command"># chmod 600 ~mcp/.ssh/authorized_keys</code>
+<code class="command"># chown -R mcp: ~mcp/.ssh</code>
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/12">
+<h1>Directories</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/13">
+<pre><code><code class="command"># mkdir -p ~mcp/apps/mcp/shared/config</code>
+<code class="command"># chown -R mcp: ~mcp/apps</code>
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/14">
+<h1>Sensitive configuration</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/15">
+<pre><code><code class="command"># cd ~mcp/apps/mcp/shared/config</code>
+<code class="command"># vi database.yml</code>
+<code class="command"># chown mcp: database.yml</code>
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/16">
+<h1>RVM <span>&amp;</span> Ruby</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/17">
+<pre><code><code class="command"># apt-get install curl git-core subversion</code>
+<code class="result">Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/18">
+<pre><code><code class="command"># cd /root</code>
+<code class="command"># curl -s \
+  https://rvm.beginrescueend.com/install/rvm \
+  -o rvm-installer</code>
+<code class="command"># chmod +x rvm-installer</code>
+<code class="command"># ./rvm-installer --version 1.6.32</code>
+<code class="result">Installation of RVM to /usr/local/rvm/ is
+complete.
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/19">
+<pre><code><code class="command"># apt-get install build-essential bison \
+  openssl libreadline6 libreadline6-dev \
+  zlib1g zlib1g-dev libssl-dev libyaml-dev \
+  libsqlite3-0 libsqlite3-dev sqlite3 \
+  libxml2-dev libxslt-dev autoconf \
+  libc6-dev ncurses-dev</code>
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/20">
+<pre><code><code class="command"># vi /usr/local/rvm/gemsets/global.gems</code>
+<code class="command"># ^vi^cat</code>
+<code class="result">rake -v0.8.7
+bundler
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/21">
+<pre><code><code class="command"># vi /etc/gemrc</code>
+<code class="command"># ^vi^cat</code>
+<code class="result">---
+install: --no-rdoc --no-ri
+update:  --no-rdoc --no-ri
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/22">
+<pre><code><code class="command"># rvm install 1.9.2-p290</code>
+<code class="result">Installing Ruby from source to:
+/usr/local/rvm/rubies/ruby-1.9.2-p290, this
+may take a while depending on your cpu(s)...
+Install of ruby-1.9.2-p290 - #complete 
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/23">
+<h1>nginx <span>&amp;</span> Passenger</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/24">
+<pre><code><code class="command"># source /usr/local/rvm/scripts/rvm</code>
+<code class="command"># rvm use 1.9.2-p290</code>
+<code class="result">Using /usr/local/rvm/gems/ruby-1.9.2-p290
+</code><code class="command"># gem install passenger -v3.0.8</code>
+<code class="result">Fetching: fastthread-1.0.7.gem (100%)
+Building native extensions.  This could
+take a while...
+Fetching: daemon_controller-0.2.6.gem (100%)
+Fetching: rack-1.3.2.gem (100%)
+...
+Successfully installed passenger-3.0.8
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/25">
+<pre><code><code class="command"># apt-get install libcurl4-openssl-dev</code>
+<code class="result">Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+</code><code class="command"># passenger-install-nginx-module</code>
+<code class="result">Welcome to the Phusion Passenger Nginx
+module installer, v3.0.8.
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/26">
+<pre><code><code class="command"># cd /opt/nginx/conf</code>
+<code class="command"># mkdir sites_available sites_enabled</code>
+<code class="command"># vi nginx.conf</code>
+<code class="command"># cd sites_available</code>
+<code class="command"># vi mcp.conf</code>
+<code class="command"># ln -s \
+  /opt/nginx/conf/sites_available/mcp.conf \
+  /opt/nginx/conf/sites_enabled/mcp.conf</code>
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/27">
+<pre><code><code class="command"># vi /etc/init.d/nginx</code>
+<code class="command"># chmod +x /etc/init.d/nginx</code>
+<code class="command"># update-rc.d -f nginx defaults</code>
+<code class="command"># /etc/init.d/nginx start</code>
+<code class="result">Starting nginx: nginx
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/28">
+<h1>Capistrano</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/29">
+<pre><code><code class="command">$ cap deploy:setup</code>
+<code class="command">$ cap deploy:check</code>
+<code class="command">$ cap deploy:cold</code>
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="2_the_old_way/01_the_old_way/30">
+<h1>What's wrong with that?</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/31">
+<h1>Not easily repeatable</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/32">
+<h1>Not consistent</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/33">
+<h1>Not portable</h1></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="2_the_old_way/01_the_old_way/34">
+<h1>"To err is human..."</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/1">
+<h1>Configuration management</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/2">
+<h1>What is it?</h1></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="3_enter_configuration_management/01_enter_configuration_management/3">
+<h1>"Infrastructure as code."</h1></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="3_enter_configuration_management/01_enter_configuration_management/4">
+<p><img src="./file/3_enter_configuration_management/chef.png" width="300" alt="chef"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="3_enter_configuration_management/01_enter_configuration_management/5">
+<p><img src="./file/3_enter_configuration_management/puppet.png" height="300" alt="puppet"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/6">
+<h1>Why we use Puppet</h1></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="3_enter_configuration_management/01_enter_configuration_management/7">
+<h1>Why it doesn't matter</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/8">
+<h1>A Puppet primer</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/9">
+<pre class="sh_ruby"><code>user { 'henry':
+  ensure     =&gt; present,
+  uid        =&gt; '507',
+  gid        =&gt; 'staff',
+  shell      =&gt; '/bin/zsh',
+  home       =&gt; '/home/henry',
+  managehome =&gt; true,
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="3_enter_configuration_management/01_enter_configuration_management/10">
+<pre><code><code class="command">$ sudo puppet apply henry.pp</code>
+<code class="result">notice:
+/Stage[main]//User[henry]/ensure: created
+notice: Finished catalog run in 0.25 seconds
+
+</code><code class="command">$ grep henry /etc/passwd</code>
+<code class="result">henry:x:507:50::/home/henry:/bin/zsh
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="3_enter_configuration_management/01_enter_configuration_management/11">
+<pre><code><code class="command">$ sudo chsh henry</code>
+<code class="result">Changing shell for henry.
+New shell [/bin/zsh]: /bin/bash
+Shell changed.
+
+</code><code class="command">$ sudo puppet apply henry.pp</code>
+<code class="result">notice:
+/Stage[main]//User[henry]/shell:
+shell changed '/bin/bash' to '/bin/zsh'
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/12">
+<h1>The Trifecta</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/13">
+<pre class="sh_ruby"><code>package { 'openssh-server':
+  ensure =&gt; installed,
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/14">
+<pre class="sh_ruby"><code>file { '/etc/sudoers':
+  ensure =&gt; present,
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/15">
+<pre class="sh_ruby"><code>service { 'sshd':
+  ensure =&gt; running,
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/16">
+<h1>Puppet Master and Agent</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/1">
+<h1>Users</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/2">
+<pre class="sh_ruby"><code>group { 'mcp':
+  ensure =&gt; present,
+  gid    =&gt; 1002,
+}
+
+user { 'mcp':
+  ensure     =&gt; present,
+  gid        =&gt; 'mcp',
+  uid        =&gt; 1001,
+  home       =&gt; '/home/mcp',
+  managehome =&gt; true,
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="4_the_better_way/01_the_better_way/3">
+<h1>A word about ordering</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/4">
+<pre class="sh_ruby"><code>group { 'mcp':
+  ensure =&gt; present,
+}
+
+Group['mcp']</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/5">
+<pre class="sh_ruby"><code>user { 'mcp':
+  ensure  =&gt; present,
+  require =&gt; Group['mcp'],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/6">
+<pre class="sh_ruby"><code>user { 'mcp':
+  ensure =&gt; present,
+  require =&gt; Group['mcp'],
+}
+
+group { 'mcp':
+  ensure =&gt; present,
+  require =&gt; User['mcp'],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/7">
+<pre><code>err: Could not apply complete catalog:
+Found dependency cycles in the following
+relationships:
+User[mcp] =&gt; Group[mcp], Group[mcp] =&gt; User[mcp];
+try using the '--graph' option and open the '.dot'
+files in OmniGraffle or GraphViz
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/8">
+<h1>SSH keys</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/9">
+<pre class="sh_ruby"><code>ssh_authorized_key { 'mcp-mudge':
+  ensure =&gt; present,
+  key    =&gt; 'AAAAB3NzaC1yc2EAAAAB...',
+  type   =&gt; dsa,
+  user   =&gt; 'mcp',
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/10">
+<h1>Directories</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/11">
+<pre class="sh_ruby"><code>file {
+  '/home/mcp/apps':
+    ensure =&gt; directory,
+    owner  =&gt; 'mcp',
+    group  =&gt; 'mcp';
+
+  '/home/mcp/apps/mcp':
+    ensure =&gt; directory,
+    owner  =&gt; 'mcp',
+    group  =&gt; 'mcp';</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/12">
+<pre class="sh_ruby"><code>  '/home/mcp/apps/mcp/shared':
+    ensure =&gt; directory,
+    owner  =&gt; 'mcp',
+    group  =&gt; 'mcp';
+
+  '/home/mcp/apps/mcp/shared/config':
+    ensure =&gt; directory,
+    owner  =&gt; 'mcp',
+    group  =&gt; 'mcp';
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/13">
+<h1>Sensitive configuration</h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/14">
+<pre class="sh_ruby"><code>file { '...config/database.yml':
+  ensure =&gt; present,
+  owner  =&gt; 'mcp',
+  group  =&gt; 'mcp',
+  source =&gt; 'puppet:///modules/mcp/database.yml',
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/15">
+<h1>The power of <code>source</code></h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/16">
+<pre class="sh_ruby"><code>file { '/some/config.yml':
+  source =&gt; [
+    'puppet:///confidential/config.yml',
+    'puppet:///modules/mcp/config.yml'
+  ],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/17">
+<h1>Dealing with Test, Staging <span>&amp;</span> Live</h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/18">
+<pre class="sh_ruby"><code>file { '/some/config.yml':
+  source =&gt; [
+    "puppet:///confidential/config.yml.$hostname",
+    "puppet:///confidential/config.yml.$tier",
+    'puppet:///modules/mcp/config.yml'
+  ],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/19">
+<pre class="sh_ruby"><code>$tier = 'test'
+# =&gt; "puppet:///confidential/config.yml.test"
+
+$tier = 'staging'
+# =&gt; "puppet:///confidential/config.yml.staging"
+
+$tier = 'live'
+# =&gt; "puppet:///confidential/config.yml.live"</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/20">
+<h1>Problems with this approach</h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/21">
+<pre class="sh_ruby"><code>$db_username = 'bob'
+$db_password = 'letmein'
+file { '/some/database.yml':
+  content =&gt; template('mcp/database.yml.erb'),
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/22">
+<pre class="sh_ruby"><code>production:
+  adapter: mysql
+  username: &lt;%= db_username %&gt;
+  password: &lt;%= db_password %&gt;</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/23">
+<h1><code>extlookup</code>, ENCs, etc.</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/24">
+<h1>RVM <span>&amp;</span> Ruby</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/25">
+<pre class="sh_ruby"><code>package { 'rvm-dependencies':
+  ensure =&gt; installed,
+  name   =&gt; [
+    'curl',
+    'git-core',
+    'subversion',
+    'build-essential',
+    ...
+  ],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/26">
+<pre class="sh_ruby"><code>file { '/root/rvm-installer':
+  ensure =&gt; present,
+  owner  =&gt; 'root',
+  group  =&gt; 'root',
+  mode   =&gt; '0700',
+  source =&gt; 'puppet:///modules/mcp/rvm',
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/27">
+<pre class="sh_ruby"><code>exec { 'install-rvm':
+  command =&gt; '/root/rvm-installer --version 1.6.32',
+  cwd     =&gt; '/root',
+  unless  =&gt; 'grep 1.6.32 /usr/local/rvm/VERSION',
+  path    =&gt; '/usr/bin:/usr/sbin:/bin:/sbin',
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/28">
+<pre class="sh_ruby"><code>file { 'global.gems':
+  ensure  =&gt; present,
+  path =&gt; '/usr/local/rvm/gemsets/global.gems',
+  content =&gt; "rake -v0.8.7\nbundler\n",
+  require =&gt; Exec['install-rvm'],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/29">
+<pre class="sh_ruby"><code>file { '/etc/gemrc':
+  ensure  =&gt; present,
+  content =&gt; "---\ninstall: --no-rdoc...",
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/30">
+<pre class="sh_ruby"><code>exec { 'rvm install ruby-1.9.2-p290':
+  creates =&gt; '/usr/local/rvm/rubies/ruby-1.9.2-p290',
+  timeout =&gt; 1800,
+  path    =&gt; '/usr/local/rvm/bin:/usr/bin...',
+  require =&gt; File['global.gems'],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/31">
+<h1>nginx <span>&amp;</span> Passenger</h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/32">
+<pre class="sh_ruby"><code>exec { 'install-passenger-3.0.8':
+  command =&gt; 'rvm-shell ... -c "gem install pas..."',
+  unless  =&gt; 'rvm-shell ... -c "gem list passen..."',
+  path    =&gt; '/usr/local/rvm/bin:/usr/bin:...',
+  timeout =&gt; 1800,
+  require =&gt; Exec['rvm install ruby-1.9.2-p290'],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/33">
+<pre><code>$ rvm-shell ruby-1.9.2-p290 -c \
+  "gem install passenger -v3.0.8"
+
+$ rvm-shell ruby-1.9.2-p290 -c \
+  "gem list passenger -v3.0.8 -i"
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/34">
+<pre class="sh_ruby"><code>exec { 'install-nginx':
+  command =&gt; 'rvm-shell ... -c "passenger-..."',
+  creates =&gt; '...agents/nginx/PassengerHelperAgent',
+  timeout =&gt; 1800,
+  path    =&gt; '/usr/local/rvm/bin:/usr/bin:...',
+  require =&gt; Exec['install-passenger-3.0.8'],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/35">
+<pre><code>$ rvm-shell ruby-1.9.2-p290 -c \
+  "passenger-install-nginx-module --auto \
+  --auto-download \
+  --prefix=/opt/nginx"
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/36">
+<pre class="sh_ruby"><code>file {
+  '/opt/nginx/conf/sites_enabled':
+    ensure =&gt; directory,
+    owner  =&gt; 'root',
+    group  =&gt; 'root';
+
+  '/opt/nginx/conf/sites_available':
+    ensure =&gt; directory,
+    owner  =&gt; 'root',
+    group  =&gt; 'root';
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/37">
+<pre class="sh_ruby"><code>file {
+  '/opt/nginx/conf/nginx.conf':
+    ensure =&gt; present,
+    owner  =&gt; 'root',
+    group  =&gt; 'root',
+    source =&gt; 'puppet:///modules/mcp/nginx.conf';
+
+  '/opt/nginx/conf/sites_available/mcp.conf':
+    ensure =&gt; present,
+    owner  =&gt; 'root',
+    group  =&gt; 'root',
+    source =&gt; 'puppet:///modules/mcp/mcp.conf';
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/38">
+<pre class="sh_ruby"><code>file {
+  '/opt/nginx/conf/sites_enabled/mcp.conf':
+    ensure =&gt; link,
+    owner  =&gt; 'root',
+    group  =&gt; 'root',
+    target =&gt; '/opt/nginx/c...vailable/mcp.conf',
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/39">
+<pre class="sh_ruby"><code>file { '/etc/init.d/nginx':
+  ensure =&gt; present,
+  owner  =&gt; 'root',
+  group  =&gt; 'root',
+  mode   =&gt; '0755',
+  source =&gt; 'puppet:///modules/mcp/nginx',
+  require =&gt; Exec['install-nginx'];
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/40">
+<pre class="sh_ruby"><code>service { 'nginx':
+  ensure     =&gt; running,
+  enable     =&gt; true,
+  hasrestart =&gt; true,
+  hasstatus  =&gt; true,
+  subscribe  =&gt; File['/opt/nginx/conf/nginx.conf'],
+  require =&gt; [
+    File['/opt/nginx/conf/nginx.conf'],
+    File['/etc/init.d/nginx']
+  ],
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="5_testing/01_testing/1">
+<h1>"With great power..."</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="5_testing/01_testing/2">
+<h1>Testing</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="5_testing/01_testing/3">
+<h1><code>$ puppet apply --noop</code></h1></div>
+</div><div class="slide" data-transition="none"><div class="content center no-shadow" ref="5_testing/01_testing/4">
+<p><img src="./file/5_testing/vagrant_chilling.png" alt="vagrant"/></p>
+
+<h1>Vagrant</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="5_testing/01_testing/5">
+<pre class="sh_ruby"><code>config.vm.provision :puppet do |puppet|
+  puppet.module_path    = "modules"
+  puppet.manifests_path = "manifests"
+  puppet.manifest_file  = "lucid32.pp"
+end</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline smaller" ref="5_testing/01_testing/6">
+<pre><code><code class="command">$ bundle exec vagrant up</code>
+<code class="result">[default] Box lucid32 was not found. Fetching box...
+[default] Downloading with Vagrant::Downloaders::HTTP...
+[default] Downloading box: http://files.vagrantup.com/lucid...
+[default] Extracting box...
+[default] Verifying box...
+[default] Cleaning up downloaded box...
+[default] Importing base box 'lucid32'...
+[default] Matching MAC address for NAT networking...
+[default] Clearing any previously set forwarded ports...
+[default] Forwarding ports...
+[default] -- ssh: 22 =&gt; 2222 (adapter 1)
+[default] Creating shared folders metadata...
+[default] Running any VM customizations...
+[default] Booting VM...
+[default] Waiting for VM to boot. This can take a few minutes.
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline smaller" ref="5_testing/01_testing/7">
+<pre><code><code class="command">$ bundle exec vagrant provision</code>
+<code class="result">[default] Running provisioner: Vagrant::Provisioners::Puppet...
+[default] Running Puppet with lucid32.pp...
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="5_testing/01_testing/8">
+<h1>Cucumber-Puppet</h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="5_testing/01_testing/9">
+<pre><code>Feature: General catalog policy
+  In order to ensure a host's catalog
+  As a manifest developer
+  I want all catalogs to obey some general rules
+
+  Scenario Outline: Compile and verify catalog
+    Given a node specified by "features/yaml/eg.yml"
+    When I compile its catalog
+    Then compilation should succeed
+    And all resource dependencies should resolve
+
+    Examples:
+      | hostname  |
+      | localhost |
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="6_wrapup/01_wrapup/1">
+<h1>"Devops"</h1></div>
+</div><div class="slide" data-transition="none"><div class="content center shadow" ref="6_wrapup/01_wrapup/2">
+<p><img src="./file/6_wrapup/twitter.png" alt="twitter"/></p>
+
+<h1>@mudge</h1></div>
+</div><div class="slide" data-transition="none"><div class="content center shadow" ref="6_wrapup/01_wrapup/3">
+<p><img src="./file/6_wrapup/github.png" alt="github"/></p>
+
+<h1>github.com/mudge</h1></div>
+</div><div class="slide" data-transition="none"><div class="content center shadow" ref="6_wrapup/01_wrapup/4">
+<p><img src="./file/6_wrapup/mudge.png" alt="mudge"/></p>
+
+<h1>mudge.name</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="6_wrapup/01_wrapup/5">
+<h1>Questions?</h1></div>
+</div></div>
+
+</body>
+</html>
