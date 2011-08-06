@@ -6,21 +6,6 @@
 # Who am I?
 
 !SLIDE center shadow
-![twitter](twitter.png)
-
-# @mudge
-
-!SLIDE center shadow
-![github](github.png)
-
-# github.com/mudge
-
-!SLIDE center shadow
-![mudge](mudge.png)
-
-# mudge.name
-
-!SLIDE center shadow
 ![nature](nature.png)
 
 !SLIDE
@@ -31,3 +16,4 @@
 
 !SLIDE
 # What am I **not** talking about?
+

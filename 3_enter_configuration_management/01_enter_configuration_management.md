@@ -2,10 +2,16 @@
 # Configuration management
 
 !SLIDE
-# Chef
+# What is it?
 
-!SLIDE
-# Puppet
+!SLIDE prettify
+# "Infrastructure as code."
+
+!SLIDE center
+![chef](chef.png =300x)
+
+!SLIDE center
+![puppet](puppet.png =x300)
 
 !SLIDE
 # Why we use Puppet
@@ -22,32 +28,36 @@
     user { 'henry':
       ensure     => present,
       uid        => '507',
-      gid        => 'admin',
+      gid        => 'staff',
       shell      => '/bin/zsh',
       home       => '/home/henry',
       managehome => true,
     }
 
-!SLIDE
+!SLIDE incremental commandline
 
-    @@@ sh
-    $ puppet apply henry.pp
-    # notice: /Stage[main]//User[henry]/ensure:
-    # created
+    $ sudo puppet apply henry.pp
+    notice:
+    /Stage[main]//User[henry]/ensure: created
+    notice: Finished catalog run in 0.25 seconds
 
-    $ puppet apply henry.pp
+    $ grep henry /etc/passwd
+    henry:x:507:50::/home/henry:/bin/zsh
 
-!SLIDE
+!SLIDE incremental commandline
 
-    @@@ sh
     $ sudo chsh henry
-    # Changing shell for henry.
-    # New shell [/bin/zsh]: /bin/bash
-    # Shell changed.
+    Changing shell for henry.
+    New shell [/bin/zsh]: /bin/bash
+    Shell changed.
 
-    $ puppet apply henry.pp
-    # notice: /Stage[main]//User[henry]/shell:
-    # shell changed '/bin/bash' to '/bin/zsh'
+    $ sudo puppet apply henry.pp
+    notice:
+    /Stage[main]//User[henry]/shell:
+    shell changed '/bin/bash' to '/bin/zsh'
+
+!SLIDE
+# The Trifecta
 
 !SLIDE
 
@@ -56,17 +66,20 @@
       ensure => installed,
     }
 
+!SLIDE
+
+    @@@ ruby
     file { '/etc/sudoers':
       ensure => present,
     }
 
+!SLIDE
+
+    @@@ ruby
     service { 'sshd':
       ensure => running,
     }
 
 !SLIDE
-# Puppet Agent
-
-!SLIDE
-# The Puppet Master
+# Puppet Master and Agent
 

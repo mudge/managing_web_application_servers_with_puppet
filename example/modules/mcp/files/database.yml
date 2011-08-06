@@ -1,0 +1,6 @@
+production:
+  adapter: mysql2
+  username: root
+  password: boo
+  database: mcp
+  host: dbserver

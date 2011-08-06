@@ -5,9 +5,7 @@
     {"section": "2_the_old_way"},
     {"section": "3_enter_configuration_management"},
     {"section": "4_the_better_way"},
-    {"section": "5_best_practices"},
-    {"section": "6_patterns"},
-    {"section": "7_testing"},
-    {"section": "8_wrapup"}
+    {"section": "5_testing"},
+    {"section": "6_wrapup"}
   ]
 }
