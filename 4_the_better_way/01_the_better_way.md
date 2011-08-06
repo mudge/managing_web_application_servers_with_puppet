@@ -6,13 +6,11 @@
     @@@ ruby
     group { 'mcp':
       ensure => present,
-      gid    => 1002,
     }
 
     user { 'mcp':
       ensure     => present,
       gid        => 'mcp',
-      uid        => 1001,
       home       => '/home/mcp',
       managehome => true,
     }
@@ -219,29 +217,11 @@
 !SLIDE smaller
 
     @@@ ruby
-    file { 'global.gems':
-      ensure  => present,
-      path => '/usr/local/rvm/gemsets/global.gems',
-      content => "rake -v0.8.7\nbundler\n",
-      require => Exec['install-rvm'],
-    }
-
-!SLIDE smaller
-
-    @@@ ruby
-    file { '/etc/gemrc':
-      ensure  => present,
-      content => "---\ninstall: --no-rdoc...",
-    }
-
-!SLIDE smaller
-
-    @@@ ruby
     exec { 'rvm install ruby-1.9.2-p290':
       creates => '/usr/local/rvm/rubies/ruby-1.9.2-p290',
       timeout => 1800,
       path    => '/usr/local/rvm/bin:/usr/bin...',
-      require => File['global.gems'],
+      require => File['install-rvm'],
     }
 
 !SLIDE
@@ -284,42 +264,16 @@
       --auto-download \
       --prefix=/opt/nginx"
 
-!SLIDE
-
-    @@@ ruby
-    file {
-      '/opt/nginx/conf/sites_enabled':
-        ensure => directory,
-        owner  => 'root',
-        group  => 'root';
-
-      '/opt/nginx/conf/sites_available':
-        ensure => directory,
-        owner  => 'root',
-        group  => 'root';
-    }
-
 !SLIDE smaller
 
     @@@ ruby
     file {
-      '/opt/nginx/conf/nginx.conf':
-        ensure => present,
-        owner  => 'root',
-        group  => 'root',
-        source => 'puppet:///modules/mcp/nginx.conf';
-
       '/opt/nginx/conf/sites_available/mcp.conf':
         ensure => present,
         owner  => 'root',
         group  => 'root',
         source => 'puppet:///modules/mcp/mcp.conf';
-    }
 
-!SLIDE smaller
-
-    @@@ ruby
-    file {
       '/opt/nginx/conf/sites_enabled/mcp.conf':
         ensure => link,
         owner  => 'root',

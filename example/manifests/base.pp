@@ -1,12 +1,10 @@
 group { 'mcp':
   ensure => present,
-  gid    => 1002,
 }
 
 user { 'mcp':
   ensure     => present,
   gid        => 'mcp',
-  uid        => 1001,
   home       => '/home/mcp',
   managehome => true,
 }
@@ -48,7 +46,7 @@ file {
 
 package { 'rvm-dependencies':
   ensure => installed,
-  name => [
+  name   => [
     'curl',
     'git-core',
     'subversion',
@@ -75,28 +73,28 @@ package { 'rvm-dependencies':
 
 file { '/root/rvm-installer':
   ensure => present,
-  owner => 'root',
-  group => 'root',
-  mode => '0700',
+  owner  => 'root',
+  group  => 'root',
+  mode   => '0700',
   source => 'puppet:///modules/mcp/rvm',
 }
 
 exec { 'install-rvm':
   command => '/root/rvm-installer --version 1.6.32',
-  cwd => '/root',
-  creates => 'grep 1.6.32 /usr/local/rvm/VERSION',
-  path => '/usr/bin:/usr/sbin:/bin:/sbin',
+  cwd     => '/root',
+  unless  => 'grep 1.6.32 /usr/local/rvm/VERSION',
+  path    => '/usr/bin:/usr/sbin:/bin:/sbin',
   require => Package['rvm-dependencies'],
 }
 
 file { '/etc/gemrc':
-  ensure => present,
+  ensure  => present,
   content => "---\ninstall: --no-rdoc --no-ri\nupdate: --no-rdoc --no-ri\n",
 }
 
 file { 'global.gems':
-  ensure => present,
-  path   => '/usr/local/rvm/gemsets/global.gems',
+  ensure  => present,
+  path    => '/usr/local/rvm/gemsets/global.gems',
   content => "rake -v0.8.7\nbundler\n",
   require => Exec['install-rvm'],
 }
@@ -104,7 +102,7 @@ file { 'global.gems':
 exec { 'rvm install ruby-1.9.2-p290':
   creates => '/usr/local/rvm/rubies/ruby-1.9.2-p290',
   timeout => 1800,
-  path => '/usr/local/rvm/bin:/usr/bin:/usr/sbin:/bin:/sbin',
+  path    => '/usr/local/rvm/bin:/usr/bin:/usr/sbin:/bin:/sbin',
   require => File['/usr/local/rvm/gemsets/global.gems'],
 }
 
@@ -120,60 +118,60 @@ exec { 'install-nginx':
   command => 'rvm-shell ruby-1.9.2-p290 -c "passenger-install-nginx-module --auto --auto-download --prefix=/opt/nginx"',
   creates => '/usr/local/rvm/gems/ruby-1.9.2-p290/gems/passenger-3.0.8/agents/nginx/PassengerHelperAgent',
   timeout => 1800,
-  path => '/usr/local/rvm/bin:/usr/bin:/usr/sbin:/bin:/sbin',
+  path    => '/usr/local/rvm/bin:/usr/bin:/usr/sbin:/bin:/sbin',
   require => Exec['install-passenger-3.0.8'],
 }
 
 file {
   '/opt/nginx/conf/sites_available':
-    ensure => directory,
-    owner => 'root',
-    group => 'root',
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
     require => Exec['install-nginx'];
 
   '/opt/nginx/conf/sites_enabled':
-    ensure => directory,
-    owner => 'root',
-    group => 'root',
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
     require => Exec['install-nginx'];
 
   '/opt/nginx/conf/nginx.conf':
-    ensure => present,
-    owner => 'root',
-    group => 'root',
-    source => 'puppet:///modules/mcp/nginx.conf',
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    source  => 'puppet:///modules/mcp/nginx.conf',
     require => Exec['install-nginx'];
 
   '/opt/nginx/conf/sites_available/mcp.conf':
     ensure => present,
-    owner => 'root',
-    group => 'root',
+    owner  => 'root',
+    group  => 'root',
     source => 'puppet:///modules/mcp/mcp.conf',
     notify => Service['nginx'];
 
   '/opt/nginx/conf/sites_enabled/mcp.conf':
     ensure => link,
-    owner => 'root',
-    group => 'root',
+    owner  => 'root',
+    group  => 'root',
     target => '/opt/nginx/conf/sites_available/mcp.conf',
     notify => Service['nginx'];
 
   '/etc/init.d/nginx':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-    source => 'puppet:///modules/mcp/nginx',
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/mcp/nginx',
     require => Exec['install-nginx'];
 }
 
 service { 'nginx':
-  ensure => running,
-  enable => true,
+  ensure     => running,
+  enable     => true,
   hasrestart => true,
-  hasstatus => true,
-  subscribe => File['/opt/nginx/conf/nginx.conf'],
-  require => [
+  hasstatus  => true,
+  subscribe  => File['/opt/nginx/conf/nginx.conf'],
+  require    => [
     File['/opt/nginx/conf/nginx.conf'],
     File['/etc/init.d/nginx']
   ],

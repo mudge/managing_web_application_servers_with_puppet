@@ -115,22 +115,10 @@
       zlib1g zlib1g-dev libssl-dev libyaml-dev \
       libsqlite3-0 libsqlite3-dev sqlite3 \
       libxml2-dev libxslt-dev autoconf \
-      libc6-dev ncurses-dev
-
-!SLIDE incremental commandline
-
-    # vi /usr/local/rvm/gemsets/global.gems
-    # ^vi^cat
-    rake -v0.8.7
-    bundler
-
-!SLIDE incremental commandline
-
-    # vi /etc/gemrc
-    # ^vi^cat
-    ---
-    install: --no-rdoc --no-ri
-    update:  --no-rdoc --no-ri
+      libc6-dev ncurses-dev libcurl4-openssl-dev
+    Reading package lists... Done
+    Building dependency tree
+    Reading state information... Done
 
 !SLIDE incremental commandline
 
@@ -159,10 +147,6 @@
 
 !SLIDE incremental commandline
 
-    # apt-get install libcurl4-openssl-dev
-    Reading package lists... Done
-    Building dependency tree
-    Reading state information... Done
     # passenger-install-nginx-module
     Welcome to the Phusion Passenger Nginx
     module installer, v3.0.8.
