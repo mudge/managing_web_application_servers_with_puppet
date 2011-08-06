@@ -1,6 +1,16 @@
 !SLIDE prettify
 # "Devops"
 
+!SLIDE
+
+# Learning Puppet
+## http://docs.puppetlabs.com/learning/
+
+!SLIDE
+
+# Vagrant
+## http://vagrantup.com/
+
 !SLIDE center shadow
 ![twitter](twitter.png)
 

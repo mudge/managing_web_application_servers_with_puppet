@@ -1,4 +1,4 @@
 source :rubygems
 
-gem "showoff", :path => "~/Dropbox/Projects/showoff"
+gem "showoff", :git => "git://github.com/mudge/showoff.git"
 gem "foreman", "~> 0.19.0"

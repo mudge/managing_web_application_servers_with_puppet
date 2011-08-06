@@ -1,7 +1,8 @@
-PATH
-  remote: ~/Dropbox/Projects/showoff
+GIT
+  remote: git://github.com/mudge/showoff.git
+  revision: be9068e80528f728b790159260a7f9c59fbcb5dd
   specs:
-    showoff (0.4.2)
+    showoff (0.4.2.1)
       bluecloth
       gli (>= 1.2.5)
       json
