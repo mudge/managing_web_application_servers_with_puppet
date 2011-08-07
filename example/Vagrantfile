@@ -4,12 +4,12 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "base"
+  config.vm.box = "natty"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   # config.vm.box_url = "http://domain.com/path/to/above.box"
-  config.vm.box_url = "http://dl.dropbox.com/u/2175127/natty.box"
+  config.vm.box_url = "http://mudge.name/downloads/natty.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
@@ -48,7 +48,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :puppet do |puppet|
     puppet.module_path    = "modules"
     puppet.manifests_path = "manifests"
-    puppet.manifest_file  = "base.pp"
+    puppet.manifest_file  = "mcp.pp"
   end
 
   # Enable provisioning with chef solo, specifying a cookbooks path (relative
