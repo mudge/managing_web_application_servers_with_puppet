@@ -161,6 +161,7 @@
     @@@ ruby
     $db_username = 'bob'
     $db_password = 'letmein'
+
     file { '/some/database.yml':
       content => template('mcp/database.yml.erb'),
     }
