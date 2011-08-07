@@ -213,6 +213,7 @@
       cwd     => '/root',
       unless  => 'grep 1.6.32 /usr/local/rvm/VERSION',
       path    => '/usr/bin:/usr/sbin:/bin:/sbin',
+      require => Package['rvm-dependencies'],
     }
 
 !SLIDE smaller
