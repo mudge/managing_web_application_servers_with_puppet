@@ -187,31 +187,21 @@ complete.
   zlib1g zlib1g-dev libssl-dev libyaml-dev \
   libsqlite3-0 libsqlite3-dev sqlite3 \
   libxml2-dev libxslt-dev autoconf \
-  libc6-dev ncurses-dev</code>
-</code></pre></div>
+  libc6-dev ncurses-dev libcurl4-openssl-dev</code>
+<code class="result">Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+</code></code></pre></div>
 </div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/20">
-<pre><code><code class="command"># vi /usr/local/rvm/gemsets/global.gems</code>
-<code class="command"># ^vi^cat</code>
-<code class="result">rake -v0.8.7
-bundler
-</code></code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/21">
-<pre><code><code class="command"># vi /etc/gemrc</code>
-<code class="command"># ^vi^cat</code>
-<code class="result">---
-install: --no-rdoc --no-ri
-update:  --no-rdoc --no-ri
-</code></code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/22">
 <pre><code><code class="command"># rvm install 1.9.2-p290</code>
 <code class="result">Installing Ruby from source to:
 /usr/local/rvm/rubies/ruby-1.9.2-p290, this
 may take a while depending on your cpu(s)...
 Install of ruby-1.9.2-p290 - #complete 
 </code></code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/23">
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/21">
 <h1>nginx <span>&amp;</span> Passenger</h1></div>
-</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/24">
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/22">
 <pre><code><code class="command"># source /usr/local/rvm/scripts/rvm</code>
 <code class="command"># rvm use 1.9.2-p290</code>
 <code class="result">Using /usr/local/rvm/gems/ruby-1.9.2-p290
@@ -224,16 +214,12 @@ Fetching: rack-1.3.2.gem (100%)
 ...
 Successfully installed passenger-3.0.8
 </code></code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/25">
-<pre><code><code class="command"># apt-get install libcurl4-openssl-dev</code>
-<code class="result">Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-</code><code class="command"># passenger-install-nginx-module</code>
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/23">
+<pre><code><code class="command"># passenger-install-nginx-module</code>
 <code class="result">Welcome to the Phusion Passenger Nginx
 module installer, v3.0.8.
 </code></code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/26">
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/24">
 <pre><code><code class="command"># cd /opt/nginx/conf</code>
 <code class="command"># mkdir sites_available sites_enabled</code>
 <code class="command"># vi nginx.conf</code>
@@ -243,29 +229,29 @@ module installer, v3.0.8.
   /opt/nginx/conf/sites_available/mcp.conf \
   /opt/nginx/conf/sites_enabled/mcp.conf</code>
 </code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/27">
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/25">
 <pre><code><code class="command"># vi /etc/init.d/nginx</code>
 <code class="command"># chmod +x /etc/init.d/nginx</code>
 <code class="command"># update-rc.d -f nginx defaults</code>
 <code class="command"># /etc/init.d/nginx start</code>
 <code class="result">Starting nginx: nginx
 </code></code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/28">
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/26">
 <h1>Capistrano</h1></div>
-</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/29">
+</div><div class="slide" data-transition="none"><div class="content incremental commandline" ref="2_the_old_way/01_the_old_way/27">
 <pre><code><code class="command">$ cap deploy:setup</code>
 <code class="command">$ cap deploy:check</code>
 <code class="command">$ cap deploy:cold</code>
 </code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content prettify" ref="2_the_old_way/01_the_old_way/30">
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="2_the_old_way/01_the_old_way/28">
 <h1>What's wrong with that?</h1></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/31">
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/29">
 <h1>Not easily repeatable</h1></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/32">
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/30">
 <h1>Not consistent</h1></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/33">
+</div><div class="slide" data-transition="none"><div class="content" ref="2_the_old_way/01_the_old_way/31">
 <h1>Not portable</h1></div>
-</div><div class="slide" data-transition="none"><div class="content prettify" ref="2_the_old_way/01_the_old_way/34">
+</div><div class="slide" data-transition="none"><div class="content prettify" ref="2_the_old_way/01_the_old_way/32">
 <h1>"To err is human..."</h1></div>
 </div><div class="slide" data-transition="none"><div class="content" ref="3_enter_configuration_management/01_enter_configuration_management/1">
 <h1>Configuration management</h1></div>
@@ -333,13 +319,11 @@ shell changed '/bin/bash' to '/bin/zsh'
 </div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/2">
 <pre class="sh_ruby"><code>group { 'mcp':
   ensure =&gt; present,
-  gid    =&gt; 1002,
 }
 
 user { 'mcp':
   ensure     =&gt; present,
   gid        =&gt; 'mcp',
-  uid        =&gt; 1001,
   home       =&gt; '/home/mcp',
   managehome =&gt; true,
 }</code></pre></div>
@@ -449,6 +433,7 @@ $tier = 'live'
 </div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/21">
 <pre class="sh_ruby"><code>$db_username = 'bob'
 $db_password = 'letmein'
+
 file { '/some/database.yml':
   content =&gt; template('mcp/database.yml.erb'),
 }</code></pre></div>
@@ -488,27 +473,15 @@ file { '/some/database.yml':
   path    =&gt; '/usr/bin:/usr/sbin:/bin:/sbin',
 }</code></pre></div>
 </div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/28">
-<pre class="sh_ruby"><code>file { 'global.gems':
-  ensure  =&gt; present,
-  path =&gt; '/usr/local/rvm/gemsets/global.gems',
-  content =&gt; "rake -v0.8.7\nbundler\n",
-  require =&gt; Exec['install-rvm'],
-}</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/29">
-<pre class="sh_ruby"><code>file { '/etc/gemrc':
-  ensure  =&gt; present,
-  content =&gt; "---\ninstall: --no-rdoc...",
-}</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/30">
 <pre class="sh_ruby"><code>exec { 'rvm install ruby-1.9.2-p290':
   creates =&gt; '/usr/local/rvm/rubies/ruby-1.9.2-p290',
   timeout =&gt; 1800,
   path    =&gt; '/usr/local/rvm/bin:/usr/bin...',
-  require =&gt; File['global.gems'],
+  require =&gt; File['install-rvm'],
 }</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/31">
+</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/29">
 <h1>nginx <span>&amp;</span> Passenger</h1></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/32">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/30">
 <pre class="sh_ruby"><code>exec { 'install-passenger-3.0.8':
   command =&gt; 'rvm-shell ... -c "gem install pas..."',
   unless  =&gt; 'rvm-shell ... -c "gem list passen..."',
@@ -516,14 +489,14 @@ file { '/some/database.yml':
   timeout =&gt; 1800,
   require =&gt; Exec['rvm install ruby-1.9.2-p290'],
 }</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/33">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/31">
 <pre><code>$ rvm-shell ruby-1.9.2-p290 -c \
   "gem install passenger -v3.0.8"
 
 $ rvm-shell ruby-1.9.2-p290 -c \
   "gem list passenger -v3.0.8 -i"
 </code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/34">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/32">
 <pre class="sh_ruby"><code>exec { 'install-nginx':
   command =&gt; 'rvm-shell ... -c "passenger-..."',
   creates =&gt; '...agents/nginx/PassengerHelperAgent',
@@ -531,47 +504,27 @@ $ rvm-shell ruby-1.9.2-p290 -c \
   path    =&gt; '/usr/local/rvm/bin:/usr/bin:...',
   require =&gt; Exec['install-passenger-3.0.8'],
 }</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/35">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/33">
 <pre><code>$ rvm-shell ruby-1.9.2-p290 -c \
   "passenger-install-nginx-module --auto \
   --auto-download \
   --prefix=/opt/nginx"
 </code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="4_the_better_way/01_the_better_way/36">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/34">
 <pre class="sh_ruby"><code>file {
-  '/opt/nginx/conf/sites_enabled':
-    ensure =&gt; directory,
-    owner  =&gt; 'root',
-    group  =&gt; 'root';
-
-  '/opt/nginx/conf/sites_available':
-    ensure =&gt; directory,
-    owner  =&gt; 'root',
-    group  =&gt; 'root';
-}</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/37">
-<pre class="sh_ruby"><code>file {
-  '/opt/nginx/conf/nginx.conf':
-    ensure =&gt; present,
-    owner  =&gt; 'root',
-    group  =&gt; 'root',
-    source =&gt; 'puppet:///modules/mcp/nginx.conf';
-
   '/opt/nginx/conf/sites_available/mcp.conf':
     ensure =&gt; present,
     owner  =&gt; 'root',
     group  =&gt; 'root',
     source =&gt; 'puppet:///modules/mcp/mcp.conf';
-}</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/38">
-<pre class="sh_ruby"><code>file {
+
   '/opt/nginx/conf/sites_enabled/mcp.conf':
     ensure =&gt; link,
     owner  =&gt; 'root',
     group  =&gt; 'root',
     target =&gt; '/opt/nginx/c...vailable/mcp.conf',
 }</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/39">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/35">
 <pre class="sh_ruby"><code>file { '/etc/init.d/nginx':
   ensure =&gt; present,
   owner  =&gt; 'root',
@@ -580,7 +533,7 @@ $ rvm-shell ruby-1.9.2-p290 -c \
   source =&gt; 'puppet:///modules/mcp/nginx',
   require =&gt; Exec['install-nginx'];
 }</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/40">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/36">
 <pre class="sh_ruby"><code>service { 'nginx':
   ensure     =&gt; running,
   enable     =&gt; true,
