@@ -191,6 +191,9 @@
 !SLIDE
 # Not portable
 
+!SLIDE
+# `sudo`
+
 !SLIDE prettify
 # "To err is human..."
 
