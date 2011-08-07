@@ -473,6 +473,7 @@ file { '/some/database.yml':
   cwd     =&gt; '/root',
   unless  =&gt; 'grep 1.6.32 /usr/local/rvm/VERSION',
   path    =&gt; '/usr/bin:/usr/sbin:/bin:/sbin',
+  require =&gt; Package['rvm-dependencies'],
 }</code></pre></div>
 </div><div class="slide" data-transition="none"><div class="content smaller" ref="4_the_better_way/01_the_better_way/28">
 <pre class="sh_ruby"><code>exec { 'rvm install ruby-1.9.2-p290':
