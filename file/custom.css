@@ -1,0 +1,42 @@
+div.slide {
+  font: small Helvetica Neue, Helvetica, sans-serif;
+  background: #fff;
+  color: #000;
+}
+div.content {
+  padding: 2em;
+}
+h1 {
+  font-weight: bold;
+}
+h1 em, h1 strong {
+  font-weight: normal;
+  font-style: normal;
+}
+h1 strong {
+  border-bottom: 5px solid #633;
+}
+h2, h1 span {
+  color: #633;
+}
+div.shadow img {
+  box-shadow: 5px 5px 5px #ccc;
+}
+code, pre.sh_sourceCode .sh_string, .command h1 {
+  font-family: Consolas, Menlo, monospace;
+  font-weight: bold;
+}
+code {
+  font-size: 120%;
+}
+h1 span {
+  font-family: Baskerville, Palatino, "Book Antiqua", serif;
+  font-style: italic;
+  font-weight: normal;
+}
+.smaller {
+  font-size: 75%;
+}
+#footer {
+  display: none;
+}
