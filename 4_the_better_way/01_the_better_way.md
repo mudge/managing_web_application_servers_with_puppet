@@ -223,7 +223,7 @@
       creates => '/usr/local/rvm/rubies/ruby-1.9.2-p290',
       timeout => 1800,
       path    => '/usr/local/rvm/bin:/usr/bin...',
-      require => File['install-rvm'],
+      require => Exec['install-rvm'],
     }
 
 !SLIDE
